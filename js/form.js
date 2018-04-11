@@ -214,7 +214,10 @@ $('form').on('submit', function(e) {
   if(!checkboxes) {
     warn('Select at least one workshop', $('.activities'), e);
   }
-
+// Did the user select a method of payment?
+  if($('#payment').val() === 'select_method') {
+    warn('Select a payment method', $('#payment'), e);
+  }
 // If Credit Card is Selected
   if($('#payment').val() === 'credit card') {
     const ccnum = $('#cc-num').val();
@@ -321,13 +324,18 @@ $('#title').on('change', function() {
     clearWarning($('#other'));
   }
 });
-// Clear Submit Warnings with T-Shirt selection
+// Clear Submit Warnings with T-Shirt Selection
 $('#design').on('change', function() {
   if($(this).val() !== 'Select Theme') {
     clearWarning(this);
   }
 });
-
+// Clear Submit Warnings with Payment Method Selection
+$('#payment').on('change', function() {
+  if($(this).val() !== 'select_method'){
+    clearWarning(this);
+  }
+});
 // Validate Credit Card Number
 $('#cc-num').on('keyup', function () {
   validateNumber($('#cc-num'), 'Number', '13-16', (val) => {
